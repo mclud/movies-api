@@ -1,0 +1,33 @@
+
+.searchbar-container {
+    z-index: 1;
+    background-color: #252830;
+    width: 200px;
+    position: relative;
+    opacity: 0.7;
+    transition: 0.3s ease-in all;
+    line-height: 30px;
+}
+.searchbar-container:hover {
+    opacity: 1;
+}
+.searchbar input {
+    z-index: 2;
+    background-color: #252830;
+    width: 170px;
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    padding-left:5px
+}
+.searchbar img {
+    z-index: 3;
+    width: 31px;
+    position: absolute;
+    right: 0;
+    background: white;
+    padding: 8px;
+    height: 97%;
+    cursor: pointer;
+}

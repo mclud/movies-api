@@ -1,0 +1,4 @@
+.movies-favs {
+    display: flex;
+    flex-wrap: wrap;
+}

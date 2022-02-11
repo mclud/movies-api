@@ -1,0 +1,21 @@
+.categorie {
+    padding: 40px 20px;
+    position: relative;
+
+}
+.categorie::after {
+    content: "";
+    width: calc(100% - (40px));
+    height: 1px;
+    border-bottom: 1px solid #252830;
+    position: absolute;
+    left: 20px;
+    bottom: 40px;
+}
+.categorie-name {
+    width: fit-content;
+    background: #252830;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+}

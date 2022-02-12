@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import MoviesListt from "../../components/MoviesListt/MoviesListt";
+import MoviesListt from "../../components/MoviesList/MoviesList";
 import {
   getMoviesBySearchAsync,
   lazySearch,

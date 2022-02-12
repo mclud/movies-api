@@ -1,12 +1,10 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import apiReducer from "../features/API/apiSlice";
 import headerReducer from "../components/Header/headerSlice";
 import favsReducer from "../features/favs/favsSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     api: apiReducer,
     header: headerReducer,
     favs: favsReducer,

@@ -38,9 +38,7 @@ export const favsSlice = createSlice({
       if (movies) {
         state.movies = JSON.parse(movies);
         state.total_favs = state.movies.length;
-      } else {
-        console.log(movies, "there is no fav stored");
-      }
+      } 
     },
   },
 });

@@ -1,7 +1,7 @@
 import logo from "../../images/film.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import Searchbar from "../../features/searchbar/Searchbar";
+import Searchbar from "../Searchbar/Searchbar";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
 import { selectHeader } from "./headerSlice";
@@ -9,7 +9,6 @@ import homePoster from "../../images/home.jpg";
 import { Flags } from "../Flags/Flags";
 
 function Header() {
-  let dispatch = useDispatch();
   let headerState = useSelector(selectHeader);
 
   return (

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./MoviesListt.css";
+import "./MoviesList.css";
 import { MovieState } from "../Movie/Movie";
 import MovieCard, { CardInterface } from "../MovieCard/MovieCard";
 import { selectApi } from "../../features/API/apiSlice";

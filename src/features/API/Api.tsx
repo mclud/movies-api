@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_KEY: string = "ba7127ff595ba064632ad793ffb91fa9";
+const API_KEY: string = "ba7127ff595ba064632ad793ffb91fa9"; 
 
 //get ALL MOVIES
 export const getMovies = async () => {

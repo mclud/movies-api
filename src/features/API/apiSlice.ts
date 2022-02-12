@@ -11,7 +11,7 @@ import {
 import {
   MoviesResults,
   moviesResultsInitialState,
-} from "../../components/MoviesListt/MoviesListt";
+} from "../../components/MoviesList/MoviesList";
 import { Categorie, Categories } from "../../pages/Categories/Categories";
 
 export interface ConfigState {

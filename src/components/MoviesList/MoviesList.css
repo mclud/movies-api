@@ -6,3 +6,21 @@
     margin: 0;
     padding: 0;
 }
+.movies-list-container {
+    padding: 5px 15px 15px
+}
+.movies-list-container h3 {
+    margin: 10px auto 30px;
+    color: white;
+    position: relative;
+    font-size: 18px;
+}
+.movies-list-container h3::after {
+    content: "";
+    height: 1px;
+    border-bottom: 1px solid grey;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+}

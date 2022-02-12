@@ -1,9 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectApi } from "../../features/API/apiSlice";
 import favImg from "../../images/fav_off.png";
 import { addFav, removeFav, selectFavs } from "../../features/favs/favsSlice";
 import "./MovieCard.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Heart } from "../Heart/Heart";
 
 //typing card props
 export interface CardInterface {
@@ -54,8 +57,8 @@ export const displayDateSortie = (date: string) => {
     let year = month[3];
     //we return the jsx
     return (
-      day + " " + monthNamesEn[monthFixed] + " " + year
-      // <div>{year}</div>
+      // day + " " + monthNamesEn[monthFixed] + " " + year
+      <div>{year}</div>
     );
   } else return "Release date unknown";
 };
@@ -63,6 +66,7 @@ export const displayDateSortie = (date: string) => {
 function MovieCard(props: CardInterface) {
   const dispatch = useDispatch();
   const favs = useSelector(selectFavs);
+  let [movieFav, setMovieFav] = useState(false);
   /*
   BUILDING THE PATH FOR IMG's SRC
   */
@@ -81,28 +85,29 @@ function MovieCard(props: CardInterface) {
   //PULLING DATA FROM PROPS
   let { id, title, poster_path, release_date } = { ...props };
 
+  //checking if moving is in favorites
+  useEffect(() => {
+    let movieFromFav = favs.movies.filter((movie) => movie.id === id);
+    if (movieFromFav.length > 0 && !movieFav) {
+      setMovieFav(true);
+    } else if (movieFav && movieFromFav.length === 0) {
+      setMovieFav(false);
+    }
+  }, [favs]);
+
   return (
-    <li className="movie" key={id} data-title={title}>
+    <li className="movie-card" key={id} data-title={title}>
       <div className="movie-container">
-        <img
-          src={favImg}
-          className="fav"
-          onClick={() => dispatch(addFav({ ...props }))}
-        />
-        <img
-          src={favImg}
-          className="fav-remove"
-          onClick={() => dispatch(removeFav({ ...props }))}
-        />
         <Link to={"/movie/" + id}>
           <img src={cleanUrl + poster_path} className="front-card" />
-          <div className="movie-hover-container">
-            <div className="movie-title">{title}</div>
-            <div className="movie-date">
-              <div>{displayDateSortie(release_date)}</div>
-            </div>
-          </div>
         </Link>
+        <div className="movie-container-details">
+          <div className="movie-card-title">{title}</div>
+          <div className="movie-card-date">
+            {displayDateSortie(release_date)}
+          </div>
+          <Heart fav={movieFav} {...props} />
+        </div>
       </div>
     </li>
   );

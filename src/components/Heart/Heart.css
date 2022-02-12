@@ -1,0 +1,10 @@
+.heart {
+    position: absolute;
+    top: -3px;
+    right: 0;
+}
+.heart svg {
+    width: 17px;
+    height: auto;
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import "./MoviesList.css";
 import { MovieState } from "../Movie/Movie";
 import MovieCard, { CardInterface } from "../MovieCard/MovieCard";
@@ -31,6 +31,7 @@ export const moviesResultsInitialState = {
 function MoviesTest(props: MoviesResultsProps) {
   const dispatch = useDispatch();
   const api = useSelector(selectApi);
+  let [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
     //let the loader be, and then observe.
@@ -59,15 +60,27 @@ function MoviesTest(props: MoviesResultsProps) {
     }, 1500);
   }, [props.results]);
 
+  //custom title of the page
+  useEffect(() => {
+    if (props.type === "search") {
+      setPageTitle(`Results: (${props.total_results})`);
+    } else {
+      setPageTitle(`Upcoming movies`);
+    }
+  }, [props]);
+
   return (
-    <ul className="movies-list">
-      {props.results
-        .filter((movie) => movie.poster_path !== null)
-        .map((movie: CardInterface) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
-      <div className="loader" />
-    </ul>
+    <div className="movies-list-container">
+      <h3>{pageTitle} </h3>
+      <ul className="movies-list">
+        {props.results
+          .filter((movie) => movie.poster_path !== null)
+          .map((movie: CardInterface) => (
+            <MovieCard key={movie.id} {...movie} />
+          ))}
+        <div className="loader" />
+      </ul>
+    </div>
   );
 }
 

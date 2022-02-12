@@ -1,5 +1,5 @@
 {
-  "name": "ty-netflix",
+  "name": "movies-api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

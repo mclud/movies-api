@@ -22,6 +22,9 @@
     padding-left:5px;
     color: white;
 }
+.searchbar input:focus-visible {
+    outline: none;
+}
 .searchbar img {
     z-index: 3;
     width: 31px;

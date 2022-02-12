@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import MoviesList from "../../components/MoviesList/MoviesList";
 import MoviesListt from "../../components/MoviesList/MoviesList";
 import {
   getMoviesBySearchAsync,
@@ -32,8 +33,8 @@ export const SearchTest = () => {
 
   return (
     <div>
-      <div>Hello votre recherche : {api.actual_search}</div>
-      <MoviesListt lazy={lazySearch} {...api.search} type="search" />
+      <div>You're looking for: {api.actual_search}</div>
+      <MoviesList lazy={lazySearch} {...api.search} type="search" />
     </div>
   );
 };

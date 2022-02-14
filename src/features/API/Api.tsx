@@ -14,6 +14,13 @@ export const getMovieById = async (id: number) => {
     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
   );
 };
+
+//get MOVIE DETAILS BY ID
+export const getMovieDetailsById = async (id: number) => {
+  return await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
+  );
+};
 //fetching NEXT PAGE OF RESULTS
 export const addNextPage = async (page: number) => {
   return await axios.get(

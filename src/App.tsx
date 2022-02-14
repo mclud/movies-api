@@ -1,24 +1,22 @@
 import "./App.css";
 import Header from "./components/Header/Header";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getConfigAsync,
   getMoviesAsync,
-  lazyMovies,
   selectApi,
 } from "./features/API/apiSlice";
 import { useEffect } from "react";
-import Movie from "./components/Movie/Movie";
 import { Routes } from "react-router";
 import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SearchPage, { SearchTest } from "./pages/SearchPage/SearchPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import { importStorage } from "./features/favs/favsSlice";
-import MoviesListt from "./components/MoviesList/MoviesList";
 import Favs from "./features/favs/Favs";
 import Categories from "./pages/Categories/Categories";
-import MoviesList from "./components/MoviesList/MoviesList";
+import { Home } from "./pages/Home/Home";
+import MoviePage from "./pages/MoviePage/MoviePage";
 
 function App() {
   let dispatch = useDispatch();
@@ -34,17 +32,16 @@ function App() {
   return (
     <Router>
       <div id="app">
+        <Header />
         <Row className="main-row">
-          <Col md={{ span: 10, offset: 1 }} sm={{ span: 12, offset: 0 }}>
-            <Header />
+          <Col
+            md={{ span: 10, offset: 1 }}
+            sm={{ span: 12, offset: 0 }}
+            className="main-col-content"
+          >
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <MoviesList {...api.movies} lazy={lazyMovies} type="movies" />
-                }
-              ></Route>
-              <Route path="/movie/:id" element={<Movie />}></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/movie/:id" element={<MoviePage />}></Route>
               <Route path="/search" element={<SearchPage />}></Route>
               <Route path="/favs" element={<Favs />}></Route>
               <Route path="/cats" element={<Categories />}></Route>

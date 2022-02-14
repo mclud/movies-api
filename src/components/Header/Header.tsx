@@ -2,15 +2,10 @@ import logo from "../../images/film.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Searchbar from "../Searchbar/Searchbar";
-import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
-import { selectHeader } from "./headerSlice";
-import homePoster from "../../images/home.jpg";
 import { Flags } from "../Flags/Flags";
 
 function Header() {
-  let headerState = useSelector(selectHeader);
-
   return (
     <Container fluid className="header d-flex flex-column">
       <nav>
@@ -18,7 +13,7 @@ function Header() {
           <Col md={3} xs={12}>
             <li className="brand d-flex align-items-center justify-space-center">
               <img className="logo" src={logo} />
-              <div>WatchOut</div>
+              <div className="logo-title">WATCHOUT</div>
             </li>
           </Col>
           <Col md={7} xs={12} className="categorys">
@@ -38,15 +33,6 @@ function Header() {
           </Col>
         </ul>
       </nav>
-      <div className="header-bg">
-        {headerState.backdrop ? (
-          <img src={headerState.backdrop} />
-        ) : (
-          <img src={homePoster} />
-        )}
-
-        <h3 className="tagline">{headerState.tagline}</h3>
-      </div>
     </Container>
   );
 }

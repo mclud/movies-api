@@ -1,6 +1,6 @@
 .movie-card {
-    width: 230px;
-    margin: 15px auto;
+    width: unset;
+    margin: 15px 2px;
     display: flex;
     justify-content: center;
 }

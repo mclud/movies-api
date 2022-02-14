@@ -1,8 +1,7 @@
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectApi } from "../../features/API/apiSlice";
-import favImg from "../../images/fav_off.png";
-import { addFav, removeFav, selectFavs } from "../../features/favs/favsSlice";
+import { selectFavs } from "../../features/favs/favsSlice";
 import "./MovieCard.css";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -64,7 +63,6 @@ export const displayDateSortie = (date: string) => {
 };
 
 function MovieCard(props: CardInterface) {
-  const dispatch = useDispatch();
   const favs = useSelector(selectFavs);
   let [movieFav, setMovieFav] = useState(false);
   /*
@@ -85,16 +83,6 @@ function MovieCard(props: CardInterface) {
   //PULLING DATA FROM PROPS
   let { id, title, poster_path, release_date } = { ...props };
 
-  //checking if moving is in favorites
-  useEffect(() => {
-    let movieFromFav = favs.movies.filter((movie) => movie.id === id);
-    if (movieFromFav.length > 0 && !movieFav) {
-      setMovieFav(true);
-    } else if (movieFav && movieFromFav.length === 0) {
-      setMovieFav(false);
-    }
-  }, [favs]);
-
   return (
     <li className="movie-card" key={id} data-title={title}>
       <div className="movie-container">
@@ -106,7 +94,7 @@ function MovieCard(props: CardInterface) {
           <div className="movie-card-date">
             {displayDateSortie(release_date)}
           </div>
-          <Heart fav={movieFav} {...props} />
+          <Heart {...props} />
         </div>
       </div>
     </li>

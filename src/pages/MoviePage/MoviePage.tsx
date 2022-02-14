@@ -4,10 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getMovieById, getMovieDetailsById } from "../../features/API/Api";
 import { selectApi } from "../../features/API/apiSlice";
-import { setLine, setBackDrop, resetHeader } from "../Header/headerSlice";
-import "./Movie.css";
-import { displayDateSortie } from "../MovieCard/MovieCard";
-import { Heart } from "../Heart/Heart";
+import "./MoviePage.css";
+import { Heart } from "../../components/Heart/Heart";
+import { displayDateSortie } from "../../components/MovieCard/MovieCard";
+import {
+  setLine,
+  setBackDrop,
+  resetHeader,
+} from "../../components/Header/headerSlice";
+import Header from "../../components/Header/Header";
+import { Banner } from "../../components/Banner/Banner";
+import { Stars } from "../../components/Stars/Stars";
 
 export interface MovieState {
   id: number;
@@ -18,6 +25,7 @@ export interface MovieState {
   tagline: string;
   poster_path: string;
   release_date: string;
+  vote_average: number;
 }
 
 export const movieInitialState = {
@@ -29,9 +37,10 @@ export const movieInitialState = {
   tagline: "",
   poster_path: "",
   release_date: "",
+  vote_average: 0,
 };
 
-function Movie() {
+function MoviePage() {
   const dispatch = useDispatch();
   const configSelector = useSelector(selectApi);
   let cfg = configSelector.config;
@@ -45,7 +54,6 @@ function Movie() {
 
   let [loadingMovie, setLoadingMovie] = useState<boolean>(false);
   let [movie, setMovie] = useState<MovieState>(movieInitialState);
-  let [movieCredits, setMovieCredits] = useState(null);
 
   function fetchMovie() {
     setLoadingMovie(true);
@@ -85,35 +93,40 @@ function Movie() {
   useEffect(fetchMovie, [configSelector]);
 
   return (
-    <div className="movie-dp">
-      {loadingMovie && <div>LOADING....</div>}
-      {movie && (
-        <div>
-          <Row className="movie-row m-0">
-            <Col md={3} className="movie-leftside">
-              <div className="movie-poster">
-                <img src={baseUrl + movie.poster_path} />
-                <div className="movie-left-bottom">
-                  <Heart {...movie} />
+    <div>
+      <Header />
+      <Banner active_search={false} />
+      <div className="movie-dp">
+        {loadingMovie && <div>LOADING....</div>}
+        {movie && (
+          <div>
+            <Row className="movie-row m-0">
+              <Col md={3} className="movie-leftside">
+                <div className="movie-poster">
+                  <img src={baseUrl + movie.poster_path} />
+                  <div className="movie-left-bottom">
+                    <Stars {...movie} />
+                    <Heart {...movie} />
+                  </div>
                 </div>
-              </div>
-            </Col>
-            <Col md={9}>
-              <div className="details">
-                <h3>{movie.title}</h3>
-                <br />
-                <div>
-                  Release date : {displayDateSortie(movie.release_date)}
+              </Col>
+              <Col md={9}>
+                <div className="details">
+                  <div className="release-date">
+                    {displayDateSortie(movie.release_date)}
+                  </div>
+                  <h3>{movie.title}</h3>
+                  <br />
+                  <br />
+                  <div>{movie.overview}</div>
                 </div>
-                <br />
-                <div>{movie.overview}</div>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      )}
+              </Col>
+            </Row>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-export default Movie;
+export default MoviePage;

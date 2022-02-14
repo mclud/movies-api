@@ -12,7 +12,7 @@ import {
   MoviesResults,
   moviesResultsInitialState,
 } from "../../components/MoviesList/MoviesList";
-import { Categorie, Categories } from "../../pages/Categories/Categories";
+import { Categorie } from "../../pages/Categories/Categories";
 
 export interface ConfigState {
   base_url: string;

@@ -1,18 +1,29 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addFav, removeFav } from "../../features/favs/favsSlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addFav, removeFav, selectFavs } from "../../features/favs/favsSlice";
 import "./Heart.css";
 
 type Props = {
   id: number;
-  fav: boolean;
 };
 export const Heart = (props: Props) => {
   const dispatch = useDispatch();
+  const favs = useSelector(selectFavs);
+  let [movieFav, setMovieFav] = useState(false);
+
+  //checking if moving is in favorites
+  useEffect(() => {
+    let movieFromFav = favs.movies.filter((movie) => movie.id === props.id);
+    if (movieFromFav.length > 0 && !movieFav) {
+      setMovieFav(true);
+    } else if (movieFav && movieFromFav.length === 0) {
+      setMovieFav(false);
+    }
+  }, [favs]);
 
   return (
-    <div className="heart" data-fav={props.fav}>
-      {props.fav ? (
+    <div className="heart" data-fav={movieFav}>
+      {movieFav ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="38"

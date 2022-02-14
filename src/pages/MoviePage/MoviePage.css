@@ -14,13 +14,17 @@
     margin: -220px auto 0;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .movie-poster img {
     width: 100%;
     border-radius: 13px;
     border: 1px solid white;
+    z-index: 999;
 }
 .movie-left-bottom {
+    display: flex;
+    align-items: center;
     margin-top:10px;
     color: grey;
 }
@@ -30,7 +34,12 @@
     /* margin: auto; */
 }
 .movie-left-bottom .heart {
-    position: relative;
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+}
+.details {
+    text-align: left;
 }
 
 @media screen and (max-width: 770px) {

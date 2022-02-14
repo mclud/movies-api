@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./MoviesList.css";
 import { MovieState } from "../Movie/Movie";
 import MovieCard, { CardInterface } from "../MovieCard/MovieCard";

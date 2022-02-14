@@ -1,0 +1,14 @@
+.header-bg .searchbar-container, .header-bg .searchbar, .header-bg .searchbar input {
+    width: 100%!important;
+}
+.header-bg .searchbar input {
+    background-color: white;
+    color: black;
+    border-radius: 7px;
+}
+.search-ico {
+    width: 31px!important;
+    border-radius: 7px;
+    height: auto!important;
+    z-index: 999;
+}

@@ -51,3 +51,6 @@
 .main-row {
   width: 100%;
 }
+.main-col-content {
+  z-index: 99;
+}

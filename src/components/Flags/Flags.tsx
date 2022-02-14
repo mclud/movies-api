@@ -14,6 +14,7 @@ export const Flags = () => {
   return (
     <div className="langs row d-flex">
       <img
+        alt="french flag"
         ref={french}
         src={flagFr}
         className="flag"
@@ -21,6 +22,7 @@ export const Flags = () => {
         onClick={(e) => handleLang(e.currentTarget.getAttribute("data-lang"))}
       />
       <img
+        alt="uk flag"
         ref={english}
         src={flagEn}
         className="flag"

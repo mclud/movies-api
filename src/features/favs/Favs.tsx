@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { importStorage, selectFavs } from "./favsSlice";
 import "./Favs.css";
+import Header from "../../components/Header/Header";
+import { Banner } from "../../components/Banner/Banner";
 
 export default function Favs() {
   const storedFavs = useSelector(selectFavs);
@@ -15,10 +17,15 @@ export default function Favs() {
   }, [storedFavs.total_favs]);
 
   return (
-    <ul className="movies-favs">
-      {storedFavs.movies.map((fav) => (
-        <MovieCard key={fav.id} {...fav} />
-      ))}
-    </ul>
+    <div>
+      <Header />
+      <Banner active_search={false} />
+      <h4 className="fav-title m-1">Favorites movies</h4>
+      <ul className="movies-favs">
+        {storedFavs.movies.map((fav) => (
+          <MovieCard key={fav.id} {...fav} />
+        ))}
+      </ul>
+    </div>
   );
 }

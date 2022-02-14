@@ -28,7 +28,7 @@ export const moviesResultsInitialState = {
   total_results: 0,
 };
 
-function MoviesTest(props: MoviesResultsProps) {
+function MoviesList(props: MoviesResultsProps) {
   const dispatch = useDispatch();
   const api = useSelector(selectApi);
   let [pageTitle, setPageTitle] = useState("");
@@ -71,7 +71,7 @@ function MoviesTest(props: MoviesResultsProps) {
 
   return (
     <div className="movies-list-container">
-      <h3>{pageTitle} </h3>
+      <h3>{pageTitle}</h3>
       <ul className="movies-list">
         {props.results
           .filter((movie) => movie.poster_path !== null)
@@ -84,4 +84,4 @@ function MoviesTest(props: MoviesResultsProps) {
   );
 }
 
-export default MoviesTest;
+export default MoviesList;

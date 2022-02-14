@@ -24,7 +24,7 @@ function Header() {
               <Link to="/favs">Favorites</Link>
             </li>
             <li>
-              <Link to="/cats">Categories</Link>
+              <Link to="/cats">Categorys</Link>
             </li>
             <Searchbar />
           </Col>

@@ -14,6 +14,7 @@ export const Heart = (props: Props) => {
   //checking if moving is in favorites
   useEffect(() => {
     let movieFromFav = favs.movies.filter((movie) => movie.id === props.id);
+    console.log("movie from fav:", movieFromFav);
     if (movieFromFav.length > 0 && !movieFav) {
       setMovieFav(true);
     } else if (movieFav && movieFromFav.length === 0) {

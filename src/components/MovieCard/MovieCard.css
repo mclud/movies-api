@@ -42,4 +42,5 @@
 .movie-container-details {
     width: 100%;
     position: relative;
+    text-align: left;
 }

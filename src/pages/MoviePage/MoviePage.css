@@ -27,6 +27,7 @@
     align-items: center;
     margin-top:10px;
     color: grey;
+    position: relative;
 }
 
 .movie-leftside {
@@ -36,7 +37,7 @@
 .movie-left-bottom .heart {
     position: absolute;
     right: 0;
-    bottom: 6px;
+    top: 0!important;
 }
 .details {
     text-align: left;

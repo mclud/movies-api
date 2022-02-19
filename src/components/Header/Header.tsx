@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import Searchbar from "../Searchbar/Searchbar";
 import { Col, Container, Row } from "react-bootstrap";
 import { Flags } from "../Flags/Flags";
+import { HeaderTrads } from "./HeaderTrad";
+import { selectNavCfg } from "../../features/navCfg/navCfgSlice";
+import { useSelector } from "react-redux";
 
 function Header() {
+  let navCfg = useSelector(selectNavCfg);
+
   return (
     <Container fluid className="header d-flex flex-column">
       <nav>
@@ -18,13 +23,13 @@ function Header() {
           </Col>
           <Col md={7} xs={12} className="categorys">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">{{ ...HeaderTrads(navCfg.lang) }.home}</Link>
             </li>
             <li>
-              <Link to="/favs">Favorites</Link>
+              <Link to="/favs">{{ ...HeaderTrads(navCfg.lang) }.favs}</Link>
             </li>
             <li>
-              <Link to="/cats">Categorys</Link>
+              <Link to="/cats">{{ ...HeaderTrads(navCfg.lang) }.cats}</Link>
             </li>
             <Searchbar />
           </Col>

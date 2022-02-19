@@ -3,13 +3,17 @@ import flagFr from "../../images/fr.png";
 import flagEn from "../../images/en.png";
 import "./Flags.css";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { setLang } from "../../features/navCfg/navCfgSlice";
 
 export const Flags = () => {
   const english = useRef<HTMLImageElement>(null);
   const french = useRef<HTMLImageElement>(null);
+  const dispatch = useDispatch();
 
-  const handleLang = (target: string | null) => {
-    console.log("lang:", target);
+  const handleLang = (lang: string | null) => {
+    console.log("lang:", lang);
+    dispatch(setLang(lang));
   };
   return (
     <div className="langs row d-flex">

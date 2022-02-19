@@ -8,7 +8,7 @@ import {
   selectApi,
 } from "./features/API/apiSlice";
 import { useEffect } from "react";
-import { Routes } from "react-router";
+import { Routes, useNavigationType } from "react-router";
 import { Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchPage from "./pages/SearchPage/SearchPage";
@@ -17,10 +17,11 @@ import Favs from "./features/favs/Favs";
 import Categories from "./pages/Categories/Categories";
 import { Home } from "./pages/Home/Home";
 import MoviePage from "./pages/MoviePage/MoviePage";
+import { selectNavCfg } from "./features/navCfg/navCfgSlice";
 
 function App() {
   let dispatch = useDispatch();
-  let api = useSelector(selectApi);
+  let navCfg = useSelector(selectNavCfg);
 
   //FETCH MOVIES & cfg - Exec 1 time at landing
   useEffect(() => {
@@ -29,10 +30,13 @@ function App() {
     dispatch(importStorage());
   }, []);
 
+  useEffect(() => {
+    console.log(navCfg);
+  });
+
   return (
     <Router>
-      <div id="app">
-        <Header />
+      <div id="app" lang={navCfg.lang}>
         <Row className="main-row">
           <Col
             md={{ span: 10, offset: 1 }}

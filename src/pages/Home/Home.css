@@ -8,11 +8,14 @@
     height:40px;
 }
 .header-content .search-ico {
-    width: 38px!important;
+    width: 40px!important;
     border-radius: 25px;
     height: auto!important;
     z-index: 999;
+    right: 0;
+    opacity: 1!important;
 }
 .searchbar-container {
     background: transparent;
+    opacity: 1;
 }

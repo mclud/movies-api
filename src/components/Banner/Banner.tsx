@@ -18,10 +18,20 @@ export const Banner = (props: BannerInterface) => {
       ) : (
         <img src={homePoster} />
       )}
-      <div className="header-content">
-        <h3 className="tagline">{headerState.tagline}</h3>
-        {props.active_search && <Searchbar />}
-      </div>
+      {headerState.backdrop ? (
+        <div className="header-content">
+          <h3 className="tagline">{headerState.tagline}</h3>
+          <br></br>
+          {props.active_search && <Searchbar />}
+        </div>
+      ) : (
+        <div className="header-content">
+          <h2>WATCHOUT</h2>
+          <h3 className="tagline">{headerState.tagline}</h3>
+          <br></br>
+          {props.active_search && <Searchbar />}
+        </div>
+      )}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export interface HeaderState {
 }
 
 const initialState: HeaderState = {
-  tagline: "",
+  tagline: "What are we watching tonight?",
   backdrop: "",
 };
 

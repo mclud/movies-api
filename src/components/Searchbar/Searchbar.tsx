@@ -8,7 +8,6 @@ function Searchbar() {
   let nav = useNavigate();
 
   const handleSearch = () => {
-    console.log("handle search");
     if (inputVal.length) nav(`/search?q=${inputVal}`);
   };
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {

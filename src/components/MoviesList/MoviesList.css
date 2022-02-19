@@ -19,7 +19,7 @@
 .movies-list-container h3::after {
     content: "";
     height: 1px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid orange;
     position: absolute;
     bottom: -15px;
     left: 0;

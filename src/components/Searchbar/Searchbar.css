@@ -29,9 +29,10 @@
     z-index: 3;
     width: 31px;
     position: absolute;
-    right: 0;
+    right: 15px;
     background: white;
     padding: 8px;
     height: 97%;
     cursor: pointer;
+    border-radius: 7px;
 }

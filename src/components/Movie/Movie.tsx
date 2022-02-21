@@ -8,7 +8,13 @@ import { setLine, setBackDrop, resetHeader } from "../Header/headerSlice";
 import "./Movie.css";
 import { displayDateSortie } from "../MovieCard/MovieCard";
 import { Heart } from "../Heart/Heart";
+import { Banner } from "../Banner/Banner";
+import { Stars } from "../Stars/Stars";
 
+export interface Genre {
+  id: number;
+  name: string;
+}
 export interface MovieState {
   id: number;
   title: string;
@@ -18,6 +24,9 @@ export interface MovieState {
   tagline: string;
   poster_path: string;
   release_date: string;
+  runtime: number;
+  vote_average: number;
+  genres: Genre[];
 }
 
 export const movieInitialState = {
@@ -29,6 +38,9 @@ export const movieInitialState = {
   tagline: "",
   poster_path: "",
   release_date: "",
+  runtime: 0,
+  vote_average: 0,
+  genres: [{ id: 0, name: "" }],
 };
 
 function Movie() {
@@ -40,7 +52,7 @@ function Movie() {
       ? configSelector.config.base_url +
         cfg.backdrop_sizes[cfg.backdrop_sizes.length - 2]
       : null;
-
+  let cats = useSelector(selectApi).cats;
   let params = useParams();
 
   let [loadingMovie, setLoadingMovie] = useState<boolean>(false);
@@ -56,7 +68,7 @@ function Movie() {
         .then((resp) => {
           //Setting movie state
           setMovie({ ...resp.data });
-          console.log(resp.data);
+          console.log("=>", resp.data);
           dispatch(setLine(resp.data.tagline));
           let credits = getMovieDetailsById(resp.data.id).then((data) =>
             console.log("!!", data.data)
@@ -74,6 +86,29 @@ function Movie() {
     }
   }
 
+  const displayDuration = (duration: number) => {
+    let h = (duration / 60).toFixed(0);
+    let m = duration % 60;
+    return h + ":" + m;
+  };
+
+  const displayCategories = () => {
+    let activeCats = cats.filter((e) => {
+      return (
+        movie.genres.filter((cat) => {
+          return cat.id === e.id;
+        }).length > 0
+      );
+    });
+    return (
+      <div className="movie-dval">
+        {activeCats.map((cat) => (
+          <div className="movie-categorie-name">{cat.name}</div>
+        ))}
+      </div>
+    );
+  };
+
   //Reset header background when leaving a movie details page
   useEffect(() => {
     return () => {
@@ -86,6 +121,7 @@ function Movie() {
 
   return (
     <div className="movie-dp">
+      <Banner active_search={false} />
       {loadingMovie && <div>LOADING....</div>}
       {movie && (
         <div>
@@ -94,6 +130,7 @@ function Movie() {
               <div className="movie-poster">
                 <img src={baseUrl + movie.poster_path} />
                 <div className="movie-left-bottom">
+                  <Stars {...movie} />
                   <Heart {...movie} />
                 </div>
               </div>
@@ -102,11 +139,24 @@ function Movie() {
               <div className="details">
                 <h3>{movie.title}</h3>
                 <br />
-                <div>
-                  Release date : {displayDateSortie(movie.release_date)}
-                </div>
                 <br />
                 <div>{movie.overview}</div>
+                <div className="movie-details">
+                  <div className="movie-d movie-duration">
+                    <div className="movie-dname">Duration</div>
+                    <div className="movie-dval">
+                      {displayDuration(movie.runtime)}
+                    </div>
+                  </div>
+                  <div className="movie-d movie-genre">
+                    <div className="movie-dname">Genre</div>
+                    {displayCategories()}
+                  </div>
+                  <div className="movie-d movie-release">
+                    <div className="movie-dname">Release date</div>
+                    <div className="movie-dval">{movie.release_date}</div>
+                  </div>
+                </div>
               </div>
             </Col>
           </Row>

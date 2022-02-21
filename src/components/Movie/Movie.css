@@ -2,6 +2,10 @@
 
     min-height: 352px;
 }
+.details {
+    text-align: left;
+    margin-top: 15px;
+}
 
 .movie-row {
     margin: 0px 0!important;
@@ -21,11 +25,95 @@
     border: 1px solid white;
 }
 .movie-left-bottom {
-    margin-top:10px;
+    margin-top: 10px;
     color: grey;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 .movie-left-bottom .heart {
     position: relative;
+}
+.movie-leftside {
+    z-index: 999;
+}
+
+.movie-dname, .movie-dval {
+    padding: 14px;
+    font-size: 17px;
+}
+
+.movie-d {
+    max-width: fit-content;
+    display: flex;
+    overflow: hidden;
+    margin: 20px 15px;
+}
+.movie-dname {
+    font-weight: 800;
+    border: 2px solid;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.movie-dval {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+.movie-duration .movie-dname {
+    color :#f32525;
+    font-weight: 800;
+    background-color: #480b0b;
+}
+.movie-duration .movie-dname {
+    color :#f32525;
+    font-weight: 800;
+    background-color: #480b0b;
+    border: 2px solid #f32525;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-color: #f32525;
+}
+.movie-duration .movie-dval {
+    color :#f32525;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-top: 2px solid #f32525;
+    border-bottom: 2px solid #f32525;
+    border-right: 2px solid #f32525;
+    border-color: #f32525;
+}
+
+.movie-release .movie-dname {
+    background-color:#48310e;
+    color: #f2a42f;
+    border-color: #f2a42f;
+}
+.movie-release .movie-dval {
+    color: #f2a42f;
+    border-color: #f2a42f;
+}
+
+.movie-genre .movie-dname {
+    background-color: #0e2248;
+    color: #2f72f2;
+    border-color: #2f72f2;
+}
+.movie-genre .movie-dval {
+    color: #2f72f2;
+    border-color: #2f72f2;
+    display: flex;
+}
+
+.movie-details {
+    display: flex;flex-wrap: wrap;
+    justify-content: left;
+    margin-top: 15px;
+}
+.movie-categorie-name {
+    margin: 0 5px;
 }
 
 @media screen and (max-width: 770px) {

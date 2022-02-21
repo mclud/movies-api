@@ -6,6 +6,7 @@ import "./Heart.css";
 type Props = {
   id: number;
 };
+
 export const Heart = (props: Props) => {
   const dispatch = useDispatch();
   const favs = useSelector(selectFavs);
@@ -14,13 +15,11 @@ export const Heart = (props: Props) => {
   //checking if moving is in favorites
   useEffect(() => {
     let movieFromFav = favs.movies.filter((movie) => movie.id === props.id);
-    console.log("movie from fav:", movieFromFav);
-    if (movieFromFav.length > 0 && !movieFav) {
+    if (movieFromFav.length > 0) {
       setMovieFav(true);
-    } else if (movieFav && movieFromFav.length === 0) {
-      setMovieFav(false);
-    }
-  }, [favs]);
+      console.log(movieFromFav[0]);
+    } else setMovieFav(false);
+  }, [props, favs]);
 
   return (
     <div className="heart" data-fav={movieFav}>

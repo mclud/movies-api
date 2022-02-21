@@ -15,7 +15,7 @@ export const Home = () => {
   }, []);
   return (
     <div>
-      <Header />
+
       <Banner active_search={true} />
       <section className="home">
         <MoviesList {...api.movies} lazy={lazyMovies} type="movies" />

@@ -43,11 +43,14 @@ const initialState: ApiState = {
   cats: [],
 };
 
-export const getMoviesAsync = createAsyncThunk("api/getMovies", async () => {
-  const response = await getMovies();
-  // The value we return becomes the `fulfilled` action payload
-  return response.data;
-});
+export const getMoviesAsync = createAsyncThunk(
+  "api/getMovies",
+  async (lang) => {
+    const response = await getMovies();
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
 
 export const getConfigAsync = createAsyncThunk("api/getConfig", async () => {
   const response = await getConfig();
@@ -171,7 +174,6 @@ export const ApiSlice = createSlice({
 
       //Get categories
       .addCase(getCategoriesAsync.fulfilled, (state, action) => {
-        console.log("ok", action.payload.genres);
         state.cats = action.payload.genres;
       });
   },

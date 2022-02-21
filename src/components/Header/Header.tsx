@@ -2,7 +2,7 @@ import logo from "../../images/film.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Searchbar from "../Searchbar/Searchbar";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import { Flags } from "../Flags/Flags";
 import { HeaderTrads } from "./HeaderTrad";
 import { selectNavCfg } from "../../features/navCfg/navCfgSlice";
@@ -17,7 +17,7 @@ function Header() {
         <ul className="d-flex justify-space-between align-items-center row">
           <Col md={3} xs={12}>
             <li className="brand d-flex align-items-center justify-space-center">
-              <img className="logo" src={logo} />
+              <img className="logo" src={logo} alt="logoo" />
               <div className="logo-title">WATCHOUT</div>
             </li>
           </Col>

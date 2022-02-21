@@ -3,16 +3,17 @@ import flagFr from "../../images/fr.png";
 import flagEn from "../../images/en.png";
 import "./Flags.css";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { setLang } from "../../features/navCfg/navCfgSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectNavCfg, setLang } from "../../features/navCfg/navCfgSlice";
+import { getMoviesAsync } from "../../features/API/apiSlice";
 
 export const Flags = () => {
   const english = useRef<HTMLImageElement>(null);
   const french = useRef<HTMLImageElement>(null);
   const dispatch = useDispatch();
+  const navCfg = useSelector(selectNavCfg);
 
   const handleLang = (lang: string | null) => {
-    console.log("lang:", lang);
     dispatch(setLang(lang));
   };
   return (
@@ -22,7 +23,7 @@ export const Flags = () => {
         ref={french}
         src={flagFr}
         className="flag"
-        data-lang="fr"
+        data-lang="fr-FR"
         onClick={(e) => handleLang(e.currentTarget.getAttribute("data-lang"))}
       />
       <img
@@ -30,7 +31,7 @@ export const Flags = () => {
         ref={english}
         src={flagEn}
         className="flag"
-        data-lang="en"
+        data-lang="en-US"
         onClick={(e) => handleLang(e.currentTarget.getAttribute("data-lang"))}
       />
     </div>

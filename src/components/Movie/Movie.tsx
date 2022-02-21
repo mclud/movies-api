@@ -10,6 +10,7 @@ import { displayDateSortie } from "../MovieCard/MovieCard";
 import { Heart } from "../Heart/Heart";
 import { Banner } from "../Banner/Banner";
 import { Stars } from "../Stars/Stars";
+import { selectNavCfg } from "../../features/navCfg/navCfgSlice";
 
 export interface Genre {
   id: number;
@@ -53,6 +54,7 @@ function Movie() {
         cfg.backdrop_sizes[cfg.backdrop_sizes.length - 2]
       : null;
   let cats = useSelector(selectApi).cats;
+  const navCfg = useSelector(selectNavCfg);
   let params = useParams();
 
   let [loadingMovie, setLoadingMovie] = useState<boolean>(false);
@@ -63,12 +65,11 @@ function Movie() {
     setLoadingMovie(true);
 
     if (params.id) {
-      getMovieById(parseInt(params.id))
+      getMovieById(parseInt(params.id), navCfg.lang)
         //request ok
         .then((resp) => {
           //Setting movie state
           setMovie({ ...resp.data });
-          console.log("=>", resp.data);
           dispatch(setLine(resp.data.tagline));
           let credits = getMovieDetailsById(resp.data.id).then((data) =>
             console.log("!!", data.data)
@@ -116,8 +117,8 @@ function Movie() {
     };
   }, []);
 
-  //Fetch movie when we have fetch the cfg from api
-  useEffect(fetchMovie, [configSelector]);
+  //Fetch movie at landing & when lang is changing
+  useEffect(fetchMovie, [navCfg.lang]);
 
   return (
     <div className="movie-dp">
@@ -139,7 +140,7 @@ function Movie() {
               <div className="details">
                 <h3>{movie.title}</h3>
                 <br />
-                <br />
+
                 <div>{movie.overview}</div>
                 <div className="movie-details">
                   <div className="movie-d movie-duration">

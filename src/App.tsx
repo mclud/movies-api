@@ -25,11 +25,12 @@ function App() {
 
   //FETCH MOVIES & cfg - Exec 1 time at landing
   useEffect(() => {
+    console.log("lang:", navCfg.lang);
     dispatch(getConfigAsync());
-    dispatch(getMoviesAsync());
+    dispatch(getMoviesAsync(navCfg.lang));
     dispatch(importStorage());
     dispatch(getCategoriesAsync());
-  }, []);
+  }, [navCfg]);
 
   return (
     <Router>

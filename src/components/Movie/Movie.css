@@ -33,6 +33,7 @@
 }
 .movie-left-bottom .heart {
     position: relative;
+    display: flex;
 }
 .movie-leftside {
     z-index: 999;
@@ -40,7 +41,7 @@
 
 .movie-dname, .movie-dval {
     padding: 14px;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .movie-d {

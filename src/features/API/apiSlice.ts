@@ -45,8 +45,8 @@ const initialState: ApiState = {
 
 export const getMoviesAsync = createAsyncThunk(
   "api/getMovies",
-  async (lang) => {
-    const response = await getMovies();
+  async (lang: string) => {
+    const response = await getMovies(lang);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

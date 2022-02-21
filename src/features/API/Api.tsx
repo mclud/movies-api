@@ -2,16 +2,16 @@ import axios from "axios";
 const API_KEY: string = "ba7127ff595ba064632ad793ffb91fa9";
 
 //get ALL MOVIES
-export const getMovies = async () => {
+export const getMovies = async (lang: string) => {
   return await axios.get(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=${lang}`
   );
 };
 
 //get MOVIE BY ID
-export const getMovieById = async (id: number) => {
+export const getMovieById = async (id: number, lang: string) => {
   return await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=${lang}`
   );
 };
 

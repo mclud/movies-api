@@ -17,7 +17,6 @@ export const Heart = (props: Props) => {
     let movieFromFav = favs.movies.filter((movie) => movie.id === props.id);
     if (movieFromFav.length > 0) {
       setMovieFav(true);
-      console.log(movieFromFav[0]);
     } else setMovieFav(false);
   }, [props, favs]);
 

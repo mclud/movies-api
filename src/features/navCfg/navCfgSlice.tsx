@@ -8,7 +8,7 @@ export interface NavCfg {
 
 const initialState: NavCfg = {
   page_type: "home",
-  lang: "en",
+  lang: "fr-FR",
 };
 
 export const navCfgSlice = createSlice({

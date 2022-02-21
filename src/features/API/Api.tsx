@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SearchByCategories } from "./apiSlice";
 const API_KEY: string = "ba7127ff595ba064632ad793ffb91fa9";
 
 //get ALL MOVIES
@@ -67,5 +68,12 @@ export const addNextSearch = async (search: string, page: number) => {
 export const getCategories = async () => {
   return await axios.get(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+  );
+};
+
+//discover by types
+export const getMoviesByCategories = async (obj: SearchByCategories) => {
+  return await axios.get(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${obj.genre}&language=${obj.lang}`
   );
 };

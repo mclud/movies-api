@@ -7,12 +7,18 @@ import {
   getMoviesBySearch,
   addNextSearch,
   getCategories,
+  getMoviesByCategories,
 } from "./Api";
 import {
   MoviesResults,
   moviesResultsInitialState,
 } from "../../components/MoviesList/MoviesList";
 import { Categorie } from "../../pages/Categories/Categories";
+
+export interface SearchByCategories {
+  lang: string;
+  genre: string;
+}
 
 export interface ConfigState {
   base_url: string;
@@ -85,6 +91,15 @@ export const lazySearch = createAsyncThunk(
   async (data: { search: string; page: number }) => {
     const { search, page } = data;
     const response = await addNextSearch(search, page + 1);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+export const getMoviesByCatAsync = createAsyncThunk(
+  "api/getMoviesByCat",
+  async (obj: SearchByCategories) => {
+    const response = await getMoviesByCategories(obj);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -175,6 +190,15 @@ export const ApiSlice = createSlice({
       //Get categories
       .addCase(getCategoriesAsync.fulfilled, (state, action) => {
         state.cats = action.payload.genres;
+      })
+
+      //Get movies by cats
+      .addCase(getMoviesByCatAsync.pending, (state, action) => {
+        console.log("pending movies by cats");
+      })
+      .addCase(getMoviesByCatAsync.fulfilled, (state, action) => {
+        console.log("fulfilled movies by cats");
+        console.log(action.payload);
       });
   },
 });

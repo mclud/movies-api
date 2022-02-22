@@ -101,7 +101,7 @@ export const getMoviesByCatAsync = createAsyncThunk(
   async (obj: SearchByCategories) => {
     const response = await getMoviesByCategories(obj);
     // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    return { res: response.data, id: obj.genre };
   }
 );
 
@@ -114,6 +114,7 @@ const addMovies = (existingMovies: any[], moviesToAdd: any[]) => {
       ).length === 0
     )
       return movieToAdd;
+    else return null;
   });
   return existingMovies.concat(toAdd);
 };
@@ -193,12 +194,14 @@ export const ApiSlice = createSlice({
       })
 
       //Get movies by cats
-      .addCase(getMoviesByCatAsync.pending, (state, action) => {
-        console.log("pending movies by cats");
-      })
       .addCase(getMoviesByCatAsync.fulfilled, (state, action) => {
-        console.log("fulfilled movies by cats");
-        console.log(action.payload);
+        //now focus the categorie we need to fill with suggestions
+        let catId = parseInt(action.payload.id);
+        state.cats.forEach((cat) => {
+          if (cat.id === catId) {
+            cat.suggestions = action.payload.res;
+          }
+        });
       });
   },
 });

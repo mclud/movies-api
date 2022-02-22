@@ -78,8 +78,8 @@ function MoviesList(props: MoviesResultsProps) {
           .map((movie: CardInterface) => (
             <MovieCard key={movie.id} {...movie} />
           ))}
-        <div className="loader" />
       </ul>
+      <div className="loader" />
     </div>
   );
 }

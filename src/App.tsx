@@ -6,6 +6,8 @@ import {
   getCategoriesAsync,
   getConfigAsync,
   getMoviesAsync,
+  getMoviesByCatAsync,
+  selectApi,
 } from "./features/API/apiSlice";
 import { useEffect } from "react";
 import { Routes } from "react-router";
@@ -22,15 +24,29 @@ import Movie from "./components/Movie/Movie";
 function App() {
   let dispatch = useDispatch();
   let navCfg = useSelector(selectNavCfg);
+  let api = useSelector(selectApi);
 
   //FETCH MOVIES & cfg - Exec 1 time at landing
   useEffect(() => {
-    console.log("lang:", navCfg.lang);
     dispatch(getConfigAsync());
     dispatch(getMoviesAsync(navCfg.lang));
     dispatch(importStorage());
     dispatch(getCategoriesAsync());
-  }, [navCfg]);
+  }, [navCfg, dispatch]);
+
+  //fill categories with suggestions
+  useEffect(() => {
+    if (
+      api.cats.length > 0 &&
+      api.cats.filter((e) => e.suggestions !== undefined).length === 0
+    ) {
+      api.cats.forEach((cat) => {
+        dispatch(
+          getMoviesByCatAsync({ lang: navCfg.lang, genre: cat.id.toString() })
+        );
+      });
+    }
+  }, [navCfg.lang, dispatch, api.cats]);
 
   return (
     <Router>

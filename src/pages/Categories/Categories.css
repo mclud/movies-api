@@ -1,7 +1,6 @@
 .categorie {
-    padding: 40px 20px;
+    padding: 5px;
     position: relative;
-
 }
 .categorie::after {
     content: "";
@@ -10,12 +9,14 @@
     border-bottom: 1px solid #252830;
     position: absolute;
     left: 20px;
-    bottom: 40px;
+    bottom: 10px;
+    font-size: 1.3rem;
 }
 .categorie-name {
     width: fit-content;
-    background: #252830;
     color: white;
-    padding: 10px;
-    font-size: 14px;
+    font-size: 1.7rem;
+}
+.categories {
+    padding-top: 100px;
 }

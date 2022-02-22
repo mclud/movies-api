@@ -1,28 +1,18 @@
-// @flow
-
-import { useEffect } from "react";
 import { Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MovieSlider } from "../../components/MovieSlider/MovieSlider";
-import { getCategoriesAsync, selectApi } from "../../features/API/apiSlice";
+import { MoviesResults } from "../../components/MoviesList/MoviesList";
+import { selectApi } from "../../features/API/apiSlice";
 import "./Categories.css";
-
-export interface Categories {
-  genres: Categorie[];
-}
 
 export interface Categorie {
   id: number;
   name: string;
+  suggestions: MoviesResults;
 }
 
 export default function Categories() {
   let api = useSelector(selectApi);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCategoriesAsync());
-  }, []);
 
   return (
     <ul className="categories row">
@@ -31,8 +21,8 @@ export default function Categories() {
           return (
             <Col md={12} key={cat.id}>
               <div className="categorie">
-                <div className="categorie-name">{cat.name}</div>
-                <MovieSlider {...cat} slidesToShow={2} />
+                <h2 className="categorie-name">{cat.name}</h2>
+                <MovieSlider {...cat} slidesToShow={5} />
               </div>
             </Col>
           );

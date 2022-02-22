@@ -1,11 +1,13 @@
 .movies-list {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    justify-content: space-around;
     margin: 0;
     padding: 0;
+    grid-template-columns: repeat(auto-fill, 200px); 
+    margin: auto;
 }
+
 .movies-list-container {
     padding: 5px 15px 15px
 }
@@ -25,3 +27,9 @@
     left: 0;
     width: 100%;
 }
+
+@media screen and (max-width:550px) {
+    .movies-list {
+    grid-template-columns: repeat(auto-fill, 200px); 
+    justify-content: center;
+}}

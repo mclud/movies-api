@@ -1,4 +1,3 @@
-// @flow
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -29,7 +28,7 @@ export const SearchTest = () => {
   };
 
   //every time there is a new query, we make the call.
-  useEffect(dispatchQuery, [urlParams]);
+  useEffect(dispatchQuery, [urlParams, dispatch]);
 
   return (
     <div>

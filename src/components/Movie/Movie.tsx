@@ -6,7 +6,6 @@ import { getMovieById, getMovieDetailsById } from "../../features/API/Api";
 import { selectApi } from "../../features/API/apiSlice";
 import { setLine, setBackDrop, resetHeader } from "../Header/headerSlice";
 import "./Movie.css";
-import { displayDateSortie } from "../MovieCard/MovieCard";
 import { Heart } from "../Heart/Heart";
 import { Banner } from "../Banner/Banner";
 import { Stars } from "../Stars/Stars";
@@ -46,12 +45,11 @@ export const movieInitialState = {
 
 function Movie() {
   const dispatch = useDispatch();
-  const configSelector = useSelector(selectApi);
-  let cfg = configSelector.config;
+  const api = useSelector(selectApi);
+  let cfg = api.config;
   let baseUrl =
-    configSelector.config.base_url !== ""
-      ? configSelector.config.base_url +
-        cfg.backdrop_sizes[cfg.backdrop_sizes.length - 2]
+    api.config.base_url !== ""
+      ? api.config.base_url + cfg.backdrop_sizes[cfg.backdrop_sizes.length - 2]
       : null;
   let cats = useSelector(selectApi).cats;
   const navCfg = useSelector(selectNavCfg);
@@ -59,7 +57,7 @@ function Movie() {
 
   let [loadingMovie, setLoadingMovie] = useState<boolean>(false);
   let [movie, setMovie] = useState<MovieState>(movieInitialState);
-  let [movieCredits, setMovieCredits] = useState(null);
+  let [movieCredits, setMovieCredits] = useState({ value: [] });
 
   function fetchMovie() {
     setLoadingMovie(true);
@@ -71,8 +69,9 @@ function Movie() {
           //Setting movie state
           setMovie({ ...resp.data });
           dispatch(setLine(resp.data.tagline));
-          let credits = getMovieDetailsById(resp.data.id).then((data) =>
-            console.log("!!", data.data)
+
+          getMovieDetailsById(resp.data.id).then((data) =>
+            setMovieCredits(data.data)
           );
 
           //dispatch backdrop only if it exists
@@ -80,19 +79,21 @@ function Movie() {
             dispatch(setBackDrop(baseUrl + resp.data.backdrop_path));
 
           setLoadingMovie(false);
-          console.log("CREDITS:", credits);
+          console.log("CREDITS:", movieCredits);
         })
         //handle error
         .catch((err) => console.log(err));
     }
   }
 
+  //return proper time format FOR Duration
   const displayDuration = (duration: number) => {
     let h = (duration / 60).toFixed(0);
     let m = duration % 60;
     return h + ":" + m;
   };
 
+  //return JSX FOR CATEGORIES
   const displayCategories = () => {
     let activeCats = cats.filter((e) => {
       return (
@@ -104,7 +105,9 @@ function Movie() {
     return (
       <div className="movie-dval">
         {activeCats.map((cat) => (
-          <div className="movie-categorie-name">{cat.name}</div>
+          <div key={cat.id} className="movie-categorie-name">
+            {cat.name}
+          </div>
         ))}
       </div>
     );
@@ -115,10 +118,10 @@ function Movie() {
     return () => {
       dispatch(resetHeader());
     };
-  }, []);
+  }, [api, dispatch]);
 
   //Fetch movie at landing & when lang is changing
-  useEffect(fetchMovie, [navCfg.lang]);
+  useEffect(fetchMovie, [navCfg.lang, dispatch]);
 
   return (
     <div className="movie-dp">
@@ -129,7 +132,7 @@ function Movie() {
           <Row className="movie-row m-0">
             <Col md={3} className="movie-leftside">
               <div className="movie-poster">
-                <img src={baseUrl + movie.poster_path} />
+                <img alt="poster" src={baseUrl + movie.poster_path} />
                 <div className="movie-left-bottom">
                   <Stars {...movie} />
                   <Heart {...movie} />

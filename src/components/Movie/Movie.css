@@ -57,6 +57,7 @@
     border-bottom-left-radius: 7px;
 }
 .movie-dval {
+    overflow: auto;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
     border-top: 2px solid;

@@ -34,8 +34,7 @@ function App() {
     dispatch(getCategoriesAsync());
   }, [navCfg, dispatch]);
 
-  //fill categories with suggestions
-  useEffect(() => {
+  const fetchSuggestionsOfCat = () => {
     if (
       api.cats.length > 0 &&
       api.cats.filter((e) => e.suggestions !== undefined).length === 0
@@ -46,7 +45,10 @@ function App() {
         );
       });
     }
-  }, [navCfg.lang, dispatch, api.cats]);
+  };
+
+  //fill categories with suggestions
+  useEffect(fetchSuggestionsOfCat, [navCfg.lang, dispatch, api.cats]);
 
   return (
     <Router>

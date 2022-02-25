@@ -14,7 +14,7 @@
 .searchbar input {
     z-index: 2;
     background-color: #252830;
-    width: 170px;
+    width: 100%;
     position: relative;
     border: none;
     border-radius: 5px;
@@ -29,7 +29,7 @@
     z-index: 3;
     width: 31px;
     position: absolute;
-    right: 15px;
+    right: 0;
     background: white;
     padding: 8px;
     height: 97%;

@@ -1,9 +1,11 @@
 .movies-favs {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin:30px auto;
+    margin: 30px auto;
     padding: 0;
+    grid-template-columns: repeat(auto-fill, 200px);
+    justify-content: space-between;
 }
 
 .fav-title {

@@ -20,6 +20,7 @@ import Categories from "./pages/Categories/Categories";
 import { Home } from "./pages/Home/Home";
 import { selectNavCfg } from "./features/navCfg/navCfgSlice";
 import Movie from "./components/Movie/Movie";
+import TestJest from "./components/TestJest/TestJest";
 
 function App() {
   let dispatch = useDispatch();
@@ -66,6 +67,29 @@ function App() {
               <Route path="/search" element={<SearchPage />}></Route>
               <Route path="/favs" element={<Favs />}></Route>
               <Route path="/cats" element={<Categories />}></Route>
+              <Route
+                path="/test"
+                element={
+                  <TestJest
+                    shouldRemember={false}
+                    onUsernameChange={function (username: string): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                    onPasswordChange={function (password: string): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                    onRememberChange={function (remember: boolean): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                    onSubmit={function (
+                      username: string,
+                      password: string
+                    ): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                  />
+                }
+              ></Route>
             </Routes>
           </Col>
         </Row>

@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MovieSlider } from "../../components/MovieSlider/MovieSlider";
 import { MoviesResults } from "../../components/MoviesList/MoviesList";
-import { getMoviesByCatAsync, selectApi } from "../../features/API/apiSlice";
+import { selectApi } from "../../features/API/apiSlice";
 import "./Categories.css";
 import { selectNavCfg } from "../../features/navCfg/navCfgSlice";
 
